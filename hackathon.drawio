@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.10">
+  <diagram name="Page-1" id="6mL4z12PTrggAhb3ZhAF">
+    <mxGraphModel dx="1261" dy="859" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-1" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="promts.py" vertex="1">
+          <mxGeometry height="130" width="130" x="470" y="930" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-2" parent="1" style="whiteSpace=wrap;html=1;" value="models.py" vertex="1">
+          <mxGeometry height="140" width="160" x="645" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Utilities" vertex="1">
+          <mxGeometry height="30" width="60" x="680" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-4" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="600" y="480" as="sourcePoint" />
+            <mxPoint x="600" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="llm.py&lt;div&gt;Contains the API agent object and queries it. Can query the memory&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="190" x="50" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-6" parent="1" style="whiteSpace=wrap;html=1;" value="memory.py" vertex="1">
+          <mxGeometry height="100" width="190" x="330" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-7" parent="1" style="whiteSpace=wrap;html=1;" value="parsing.py&lt;br&gt;Receives response from user, sends to llm" vertex="1">
+          <mxGeometry height="100" width="200" x="50" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-8" parent="1" style="whiteSpace=wrap;html=1;" value="note_taker.py" vertex="1">
+          <mxGeometry height="100" width="180" x="625" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-9" parent="1" style="whiteSpace=wrap;html=1;" value="API" vertex="1">
+          <mxGeometry height="70" width="460" x="40" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-10" parent="1" style="whiteSpace=wrap;html=1;" value="main.py&lt;br&gt;Session Manager, waits for response and sends to the frontend" vertex="1">
+          <mxGeometry height="110" width="325" x="82.5" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-14" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-12" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-12" parent="1" style="whiteSpace=wrap;html=1;" value="Frontend" vertex="1">
+          <mxGeometry height="60" width="390" x="50" y="10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
