@@ -1,5 +1,6 @@
 from llm import generate_response  # your LLM wrapper
 from models import ParsedPrompt
+import prompts
 
 async def parse_prompt_llm(text: str) -> ParsedPrompt:
     """
@@ -8,8 +9,14 @@ async def parse_prompt_llm(text: str) -> ParsedPrompt:
     """
     prompt = f"""
     You are a clinician AI. Analyze the patient's text and return a JSON object with:
-    - intent: one of 'venting', 'question', 'report', 'other'
-    - emotion: one of 'anxious', 'sad', 'happy', 'neutral'
+    - intent: one of 'venting', 'question', 'report', 'reflection', 'goal', 'narrative', 'worry', 'other'
+    {prompts.INTENT_DESCRIPTIONS}
+
+
+
+    - emotion: one of:
+    {prompts.EMOTION_DEFINITIONS}
+    
     - memory_candidates: short_term (temporary context), long_term (clinically relevant info)
     Patient text: \"\"\"{text}\"\"\"
     """
