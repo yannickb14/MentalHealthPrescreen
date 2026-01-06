@@ -6,13 +6,16 @@ load_dotenv()
 
 # Access environment variables
 BACKBOARD_API_KEY = os.getenv("BACKBOARD_API_KEY")
+OPENAI_API_KEY = os.getenv("OPEN_API_KEY")
 
 def validate_config():
     """
     Validates that necessary environment variables are set.
     """
     if not BACKBOARD_API_KEY:
-        print("Warning: API_KEY is not set.")
+        print("Warning: BACKBOARD_API_KEY is not set.")
+    if not OPENAI_API_KEY:
+        print("Warning: OPENAI_API_KEY is not set.")
 
 if __name__ == "__main__":
     validate_config()
