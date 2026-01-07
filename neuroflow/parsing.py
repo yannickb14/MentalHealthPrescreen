@@ -9,7 +9,7 @@ from memory import MemoryManager
 
 #POST
 def post_patient_text_to_llm(llm_client: LLMClient, patient_text: str, memory_context: str = ""):
-    prompt = prompt_builder.build_parsing_prompt(patient_text, memory_context) #build prompt
+    prompt = prompt_builder.build_full_prompt(patient_text, memory_context) #build prompt
     response = llm_client.post_prompt(prompt) #json response
     return response # dict[str->Any]
 
