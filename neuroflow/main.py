@@ -1,15 +1,18 @@
 import asyncio
-from parsing import parse_prompt_llm
-from memory import NeuroFlow
+from parsing import parse_llm_response #<- I think this? #parse_prompt_llm
+from memory import MemoryManager #NeuroFlow
 from llm import LLMClient
 from prompt_schemas import ParsedResponse
+from dotenv import load_dotenv
+
+load_dotenv()
 
 async def main():
     # ---- 1. Initialize LLM and memory ----
     llm = LLMClient()
     await llm.init_assistant()
 
-    memory_manager = NeuroFlow()
+    memory_manager = MemoryManager()
     await memory_manager.init_assistant()
 
     # ---- 2. Create a session/thread for this patient ----
@@ -20,7 +23,7 @@ async def main():
     patient_input = "I have trouble sleeping at night and feel anxious about work."
 
     # ---- 4. Parse input with LLM ----
-    parsed: ParsedResponse = await parse_prompt_llm(patient_input, llm)
+    parsed: ParsedResponse = await parse_llm_response(patient_input, llm)
 
     print("Parsed Prompt:")
     print(parsed)

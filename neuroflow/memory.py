@@ -1,12 +1,14 @@
 import os
 from backboard import BackboardClient
 import asyncio
-from config import BACKBOARD_API_KEY
 
 class MemoryManager:
     def __init__(self):
+        api_key = os.getenv("BACKBOARD_API_KEY")
+        if api_key is None:
+            raise Exception("BACKBOARD API KEY not found")
         self.client = BackboardClient(
-            api_key=BACKBOARD_API_KEY
+            api_key=api_key
         )
         self.assistant = None #TODO, have some assisntant ID in a config file everywhere
                               #So we only craete a new one when needed.
@@ -35,9 +37,8 @@ class MemoryManager:
         if not long_term:
             return
 
-        for item in long_term: #TODO This is going to display evtg the AI is thinking to the patient
-                            # Dont need the paitent to know exactly what the AI is thinking
-            await self.client.add_message(
+        for item in long_term: 
+            await self.client.add_memory(
                 thread_id=thread_id,
                 content=item,
                 memory="Auto",   # Let Backboard decide storage

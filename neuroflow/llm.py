@@ -5,44 +5,7 @@ from backboard import BackboardClient
 from prompt_schemas import ParsedResponse
 import prompts
 import json
-
-#TODO Where does this come from?
-def generate_response():
-    raise NotImplementedError("Implement Generate Response and Import it")
-
-async def parse_prompt_llm(text: str) -> ParsedResponse:
-    """
-    Use LLM to parse raw patient text into structured ParsedPrompt.
-    Returns: ParsedPrompt object with intent, emotion, and memory candidates.
-    """
-    prompt = f"""
-    You are a clinician AI. Analyze the patient's text and return a JSON object with:
-    - intent: one of 'venting', 'question', 'report', 'reflection', 'goal', 'narrative', 'worry', 'other'
-    {prompts.INTENT_DESCRIPTIONS}
-
-
-
-    - emotion: one of:
-    {prompts.EMOTION_DEFINITIONS}
-    
-    - memory_candidates: short_term (temporary context), long_term (clinically relevant info)
-    Patient text: \"\"\"{text}\"\"\"
-    """
-
-    response_text = await generate_response(prompt)
-
-    # Parse LLM output as JSON (assumes LLM returns valid JSON)
-    import json
-    data = json.loads(response_text)
-
-    return ParsedResponse(
-        text=text,
-        intent=data.get("intent"),
-        emotion=data.get("emotion"),
-        memory_candidates=data.get("memory_candidates", {"short_term": [], "long_term": []}),
-        entities=data.get("entities", {})
-    )
-
+from typing import Dict, Any, Optional
 
 class LLMClient:
     """
@@ -71,7 +34,7 @@ class LLMClient:
         thread_id: Optional[str] = None,
         memory: str = "Auto",
         stream: bool = False
-    ) -> dict[str, any]:
+    ) -> Dict[str, Any]:
         """
         Sends a prompt expecting JSON output.
         Returns both raw text and parsed JSON.
