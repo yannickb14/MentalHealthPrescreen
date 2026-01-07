@@ -19,7 +19,7 @@ def build_full_prompt(
     """
 
     # Step 1: Determine ResponsePlan
-    plan = build_response_plan(parsed) if parsed else default_response_plan()
+    plan: ResponsePlan = build_response_plan(parsed) if parsed else default_response_plan()
 
     # Step 2: Render ResponsePlan into text
     instructions = []
