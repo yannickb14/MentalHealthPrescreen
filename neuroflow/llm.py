@@ -62,29 +62,31 @@ class LLMClient:
                 description=description
             )
 
-    async def generate_response(
+    #POST
+    async def post_prompt(
         self,
         prompt: str,
         thread_id: Optional[str] = None,
-        memory: str = "None",  # "Auto" for persistence, "None" for temporary
+        memory: str = "Auto",
         stream: bool = False
-    ) -> str:
+    ) -> Dict[str, Any]:
         """
-        Sends a prompt to the LLM and returns the response text.
-        Optionally attaches to a thread for memory context.
+        Sends a prompt expecting JSON output.
+        Returns both raw text and parsed JSON.
         """
-        if self.assistant is None:
-            await self.init_assistant()
-
-        if thread_id is None:
-            # Create a temporary thread for single-use LLM call
-            thread = await self.client.create_thread(self.assistant.assistant_id)
-            thread_id = thread.thread_id
-
-        response = await self.client.add_message(
+        raw_text = await self.generate_response(
+            prompt=prompt,
             thread_id=thread_id,
-            content=prompt,
             memory=memory,
             stream=stream
         )
-        return response.content
+
+        try:
+            data = json.loads(raw_text)
+        except json.JSONDecodeError:
+            raise ValueError("LLM did not return valid JSON")
+
+        return {
+            "raw_text": raw_text,
+            "json": data
+        }

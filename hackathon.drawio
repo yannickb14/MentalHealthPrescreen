@@ -1,14 +1,11 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.10">
   <diagram name="Page-1" id="6mL4z12PTrggAhb3ZhAF">
-    <mxGraphModel dx="1183" dy="805" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1652" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-1" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="promts.py&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Structured texts to add to prompts&lt;/div&gt;" vertex="1">
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-1" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="promts.py&lt;div&gt;Static (predefined) texts&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Structured texts to add to prompts&lt;/div&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="130" width="130" x="585" y="800" as="geometry" />
-        </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-2" parent="1" style="whiteSpace=wrap;html=1;" value="prompt_schemas.py&lt;div&gt;defines structured objects for patient input, LLM output, and response planning.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ParsedResponse: Converts LLM JSON into python object ready to query the memory.&lt;/div&gt;" vertex="1">
-          <mxGeometry height="170" width="220" x="790" y="550" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-31" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-5" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-9" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -52,11 +49,6 @@
               <mxPoint x="570" y="470" />
               <mxPoint x="570" y="470" />
             </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-28" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="calls" vertex="1">
-          <mxGeometry relative="1" x="0.1778" y="4" as="geometry">
-            <mxPoint x="-44" y="5" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-45" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="GET" vertex="1">
@@ -119,6 +111,14 @@
         <mxCell id="sVBiCvpYJttLRyskf0Hf-37" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-16" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-1" value="Calls">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-56" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-16" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="sVBiCvpYJttLRyskf0Hf-52">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-57" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-56" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Calls" vertex="1">
+          <mxGeometry relative="1" x="0.1869" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-16" parent="1" style="whiteSpace=wrap;html=1;" value="prompt_builder.py&lt;div&gt;Outputs a string to be used as a prompt&lt;/div&gt;" vertex="1">
           <mxGeometry height="135" width="170" x="630" y="360" as="geometry" />
         </mxCell>
@@ -143,6 +143,18 @@
           <mxGeometry relative="1" x="-0.1451" y="-2" as="geometry">
             <mxPoint y="-1" as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-53" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="550" width="480" x="960" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-2" parent="1" style="whiteSpace=wrap;html=1;" value="prompt_schemas.py&lt;div&gt;defines structured objects for patient input, LLM output, and response planning.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ParsedResponse: Converts LLM JSON into python object ready to query the memory.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ResponsePlan&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="220" x="980" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-52" parent="1" style="whiteSpace=wrap;html=1;" value="response_planner.py&lt;div&gt;Responsible for dictating the &lt;b&gt;tone&lt;/b&gt;&amp;nbsp;of the LLM response. Injects this into the prompt sent to the llm&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="220" x="980" y="577.5" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-54" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="TOOLS" vertex="1">
+          <mxGeometry height="30" width="60" x="1170" y="265" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
