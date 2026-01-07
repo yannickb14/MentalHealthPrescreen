@@ -2,21 +2,45 @@
 
 from prompts import INTENT_DEFINITIONS, EMOTION_DEFINITIONS, RESPONSE_INSTRUCTIONS
 from prompt_schemas import ParsedResponse, ResponsePlan
+from response_planner import default_response_plan, build_response_plan
 
-def build_parsing_prompt(patient_text: str, memory_context: str = "") -> str:
+def build_full_prompt(
+    patient_text: str = "",
+    parsed: ParsedResponse | None = None,
+    memory_context: str = ""
+) -> str:
     """
-    Build the prompt text for the LLM to parse patient input.
-    
-    Arguments:
-        patient_text: Raw text from the patient.
-        memory_context: Optional string of relevant memory (short-term or long-term) to include.
+    Build the full LLM prompt:
+    - Parsing instructions (intent, emotion, memory_candidates)
+    - Response plan instructions (tone, goals, constraints)
+    - Patient text and optional memory context
 
-    Returns:
-        A string prompt to send to the LLM.
+    If parsed is None, this is the first turn and a default ResponsePlan is used.
     """
 
+    # Step 1: Determine ResponsePlan
+    plan = build_response_plan(parsed) if parsed else default_response_plan()
 
-    prompt = f"""
+    # Step 2: Render ResponsePlan into text
+    instructions = []
+    if plan.tone:
+        instructions.append(f"- Tone: {plan.tone}")
+    if plan.goals:
+        instructions.append("Goals:")
+        for g in plan.goals:
+            instructions.append(f"- {g}")
+    if plan.constraints:
+        instructions.append("Constraints:")
+        for c in plan.constraints:
+            instructions.append(f"- {c}")
+    plan_text = "\n".join(instructions)
+
+    # Step 3: Include patient text (if any) and memory context
+    patient_block = f'Patient message:\n"""{patient_text}"""' if patient_text else "No patient message yet."
+    memory_block = f"Memory context:\n\"\"\"{memory_context}\"\"\"" if memory_context else ""
+
+    # Step 4: Compose full prompt
+    full_prompt = f"""
     You are a clinician AI. Analyze the patient's text and return a JSON object with the following fields:
 
     - intent: one of:
@@ -30,47 +54,15 @@ def build_parsing_prompt(patient_text: str, memory_context: str = "") -> str:
     - response: text to respond back to the patient
     {RESPONSE_INSTRUCTIONS}
 
-    Use the following patient text as input:
-    \"\"\"{patient_text}\"\"\"
+    - terminate: boolean whether the chat is over (should be indicated by patient)
 
-    Include any relevant memory context:
-    \"\"\"{memory_context}\"\"\"
+    Response guidelines:
+    {plan_text}
 
-    Include a boolean called "terminate" indicating if the chat is over.
+    {patient_block}
+
+    {memory_block}
 
     Return ONLY valid JSON. Do not include explanations or extra text.
     """
-    return prompt
-
-def build_response_prompt(
-    parsed: ParsedResponse,
-    plan: ResponsePlan
-) -> str:
-    instructions = []
-
-    if plan.tone:
-        instructions.append(f"- Tone: {plan.tone}")
-
-    if plan.goals:
-        instructions.append("Goals:")
-        for g in plan.goals:
-            instructions.append(f"- {g}")
-
-    if plan.constraints:
-        instructions.append("Constraints:")
-        for c in plan.constraints:
-            instructions.append(f"- {c}")
-
-    instruction_block = "\n".join(instructions)
-
-    return f"""
-    You are a therapeutic nurse AI.
-
-    Response guidelines:
-    {instruction_block}
-
-    Patient message:
-    \"\"\"{parsed.text}\"\"\"
-
-    Respond directly to the patient.
-    """
+    return full_prompt
