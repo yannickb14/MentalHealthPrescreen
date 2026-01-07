@@ -2,7 +2,7 @@ import asyncio
 from parsing import parse_prompt_llm
 from memory import NeuroFlow
 from llm import LLMClient
-from MentalHealthPrescreen.neuroflow.prompt_schemas import ParsedResponse
+from prompt_schemas import ParsedResponse
 
 async def main():
     # ---- 1. Initialize LLM and memory ----

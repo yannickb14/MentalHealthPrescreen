@@ -2,11 +2,13 @@
 import asyncio
 import json
 from backboard import BackboardClient
-from MentalHealthPrescreen.neuroflow.prompt_schemas import ParsedResponse, ResponsePlan
+from ..prompt_schemas import ParsedResponse, ResponsePlan
+
+from config import BACKBOARD_API_KEY
 
 async def main():
     # Initialize the Backboard client
-    client = BackboardClient(api_key="YOUR_API_KEY")
+    client = BackboardClient(api_key=BACKBOARD_API_KEY)
 
     # Define a tool (function) for the assistant to call
     tools = [{
