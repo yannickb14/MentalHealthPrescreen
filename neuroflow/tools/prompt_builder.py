@@ -1,6 +1,7 @@
 # prompt_builder.py
 
 from prompts import INTENT_DEFINITIONS, EMOTION_DEFINITIONS, RESPONSE_INSTRUCTIONS
+from prompt_schemas import ParsedResponse, ResponsePlan
 
 def build_parsing_prompt(patient_text: str, memory_context: str = "") -> str:
     """
@@ -40,3 +41,36 @@ def build_parsing_prompt(patient_text: str, memory_context: str = "") -> str:
     Return ONLY valid JSON. Do not include explanations or extra text.
     """
     return prompt
+
+def build_response_prompt(
+    parsed: ParsedResponse,
+    plan: ResponsePlan
+) -> str:
+    instructions = []
+
+    if plan.tone:
+        instructions.append(f"- Tone: {plan.tone}")
+
+    if plan.goals:
+        instructions.append("Goals:")
+        for g in plan.goals:
+            instructions.append(f"- {g}")
+
+    if plan.constraints:
+        instructions.append("Constraints:")
+        for c in plan.constraints:
+            instructions.append(f"- {c}")
+
+    instruction_block = "\n".join(instructions)
+
+    return f"""
+    You are a therapeutic nurse AI.
+
+    Response guidelines:
+    {instruction_block}
+
+    Patient message:
+    \"\"\"{parsed.text}\"\"\"
+
+    Respond directly to the patient.
+    """

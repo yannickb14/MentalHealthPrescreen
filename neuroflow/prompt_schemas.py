@@ -18,9 +18,14 @@ class ParsedResponse:
 class ResponsePlan:
     """
     Used by backbone to plan a response for the patient.
-    unused so far.
+    Depending on the patient's intent and emotion, the llm should respond accordingly.
+
+    WILL USE INTENT AND EMOTION TO RESPOND ACCORDINGLY
     """
     tone: str = "neutral"  # e.g., empathetic, supportive
     goals: List[str] = field(default_factory=list)
     constraints: List[str] = field(default_factory=list)
     context: Dict = field(default_factory=dict)
+
+    
+
