@@ -4,40 +4,8 @@ from typing import Optional
 from backboard import BackboardClient
 from MentalHealthPrescreen.neuroflow.prompt_schemas import ParsedResponse
 import prompts
-
-async def parse_prompt_llm(text: str) -> ParsedResponse:
-    """
-    Use LLM to parse raw patient text into structured ParsedPrompt.
-    Returns: ParsedPrompt object with intent, emotion, and memory candidates.
-    """
-    prompt = f"""
-    You are a clinician AI. Analyze the patient's text and return a JSON object with:
-    - intent: one of 'venting', 'question', 'report', 'reflection', 'goal', 'narrative', 'worry', 'other'
-    {prompts.INTENT_DESCRIPTIONS}
-
-
-
-    - emotion: one of:
-    {prompts.EMOTION_DEFINITIONS}
-    
-    - memory_candidates: short_term (temporary context), long_term (clinically relevant info)
-    Patient text: \"\"\"{text}\"\"\"
-    """
-
-    response_text = await generate_response(prompt)
-
-    # Parse LLM output as JSON (assumes LLM returns valid JSON)
-    import json
-    data = json.loads(response_text)
-
-    return ParsedResponse(
-        text=text,
-        intent=data.get("intent"),
-        emotion=data.get("emotion"),
-        memory_candidates=data.get("memory_candidates", {"short_term": [], "long_term": []}),
-        entities=data.get("entities", {})
-    )
-
+import json
+from typing import Dict, Any, Optional
 
 class LLMClient:
     """
@@ -59,29 +27,31 @@ class LLMClient:
                 description=description
             )
 
-    async def generate_response(
+    #POST
+    async def post_prompt(
         self,
         prompt: str,
         thread_id: Optional[str] = None,
-        memory: str = "None",  # "Auto" for persistence, "None" for temporary
+        memory: str = "Auto",
         stream: bool = False
-    ) -> str:
+    ) -> Dict[str, Any]:
         """
-        Sends a prompt to the LLM and returns the response text.
-        Optionally attaches to a thread for memory context.
+        Sends a prompt expecting JSON output.
+        Returns both raw text and parsed JSON.
         """
-        if self.assistant is None:
-            await self.init_assistant()
-
-        if thread_id is None:
-            # Create a temporary thread for single-use LLM call
-            thread = await self.client.create_thread(self.assistant.assistant_id)
-            thread_id = thread.thread_id
-
-        response = await self.client.add_message(
+        raw_text = await self.generate_response(
+            prompt=prompt,
             thread_id=thread_id,
-            content=prompt,
             memory=memory,
             stream=stream
         )
-        return response.content
+
+        try:
+            data = json.loads(raw_text)
+        except json.JSONDecodeError:
+            raise ValueError("LLM did not return valid JSON")
+
+        return {
+            "raw_text": raw_text,
+            "json": data
+        }

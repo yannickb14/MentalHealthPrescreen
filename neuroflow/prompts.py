@@ -1,4 +1,4 @@
-INTENT_DESCRIPTIONS = """
+INTENT_DEFINITIONS = """
 Intent Definitions for NeuroFlow:
 
 venting:
@@ -65,4 +65,8 @@ guilty:
 hopeful:
     Patient expresses optimism or positive anticipation about future events or changes.
     Example: "I’m hopeful that therapy will help me manage my anxiety."
+"""
+
+RESPONSE_INSTRUCTIONS = """
+
 """
