@@ -1,38 +1,98 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.10">
   <diagram name="Page-1" id="6mL4z12PTrggAhb3ZhAF">
-    <mxGraphModel dx="1261" dy="859" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1183" dy="805" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-1" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="promts.py" vertex="1">
-          <mxGeometry height="130" width="130" x="470" y="930" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-1" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="promts.py&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Structured texts to add to prompts&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="130" x="585" y="800" as="geometry" />
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-2" parent="1" style="whiteSpace=wrap;html=1;" value="models.py" vertex="1">
-          <mxGeometry height="140" width="160" x="645" y="910" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-2" parent="1" style="whiteSpace=wrap;html=1;" value="prompt_schemas.py&lt;div&gt;defines structured objects for patient input, LLM output, and response planning.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;ParsedResponse: Converts LLM JSON into python object ready to query the memory.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="170" width="220" x="790" y="550" as="geometry" />
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Utilities" vertex="1">
-          <mxGeometry height="30" width="60" x="680" y="30" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-31" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-5" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-9" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-4" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
-          <mxGeometry height="50" relative="1" width="50" as="geometry">
-            <mxPoint x="600" y="480" as="sourcePoint" />
-            <mxPoint x="600" y="30" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="llm.py&lt;div&gt;Contains the API agent object and queries it. Can query the memory&lt;/div&gt;" vertex="1">
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="llm.py&lt;div&gt;Contains the API agent object and queries it. Can query the memory.&lt;/div&gt;&lt;div&gt;Builds a JSON object summarizing the message from the user.&lt;/div&gt;" vertex="1">
           <mxGeometry height="100" width="190" x="50" y="540" as="geometry" />
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-6" parent="1" style="whiteSpace=wrap;html=1;" value="memory.py" vertex="1">
-          <mxGeometry height="100" width="190" x="330" y="540" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-29" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-6" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-9" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-7" parent="1" style="whiteSpace=wrap;html=1;" value="parsing.py&lt;br&gt;Receives response from user, sends to llm" vertex="1">
-          <mxGeometry height="100" width="200" x="50" y="320" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-6" parent="1" style="whiteSpace=wrap;html=1;" value="memory.py&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Takes a structured ParsedResponse object from parsing.py (which comes from LLM JSON output)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="190" x="407.5" y="540" as="geometry" />
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-8" parent="1" style="whiteSpace=wrap;html=1;" value="note_taker.py" vertex="1">
-          <mxGeometry height="100" width="180" x="625" y="560" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-17" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-7" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-18" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-17" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Calls" vertex="1">
+          <mxGeometry relative="1" x="-0.1366" y="7" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-25" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-7" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-5" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="140" y="495" />
+              <mxPoint x="145" y="495" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-26" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-25" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="POST (returns JSON)" vertex="1">
+          <mxGeometry relative="1" x="0.1231" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-7" parent="1" style="whiteSpace=wrap;html=1;" value="parsing.py&lt;br&gt;Reads the string inputted by the user, and converts it into a Python object (ParsedPrompt), using project metadata and additional instructions.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;From the JSON returned by llm, parsing.py calls the memory with the ParsedResponse object it creates.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="130" width="270" x="50" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-27" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-8" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-6" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="470" />
+              <mxPoint x="570" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-28" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="calls" vertex="1">
+          <mxGeometry relative="1" x="0.1778" y="4" as="geometry">
+            <mxPoint x="-44" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-45" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-27" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="GET" vertex="1">
+          <mxGeometry relative="1" x="-0.4179" y="-1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-40" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-8" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-39" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-41" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-40" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Writes to" vertex="1">
+          <mxGeometry relative="1" x="-0.2133" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-8" parent="1" style="whiteSpace=wrap;html=1;" value="note_taker.py:&lt;div&gt;From both the long term and short term memory, constructs summary notes of the discussion.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="180" x="535" y="135" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-9" parent="1" style="whiteSpace=wrap;html=1;" value="API" vertex="1">
           <mxGeometry height="70" width="460" x="40" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-20" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-10" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-21" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-20" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Calls" vertex="1">
+          <mxGeometry relative="1" x="-0.161" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-46" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-10" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-49" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-46" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="When done" vertex="1">
+          <mxGeometry relative="1" x="-0.3931" y="-3" as="geometry">
+            <mxPoint x="14" y="-3" as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-10" parent="1" style="whiteSpace=wrap;html=1;" value="main.py&lt;br&gt;Session Manager, waits for response and sends to the frontend" vertex="1">
           <mxGeometry height="110" width="325" x="82.5" y="130" as="geometry" />
@@ -40,8 +100,49 @@
         <mxCell id="sVBiCvpYJttLRyskf0Hf-14" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-12" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-10" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-19" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-14" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Calls" vertex="1">
+          <mxGeometry relative="1" x="-0.1444" y="-4" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-50" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-12" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="sVBiCvpYJttLRyskf0Hf-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-51" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-50" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Sees" vertex="1">
+          <mxGeometry relative="1" x="0.082" y="-2" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-12" parent="1" style="whiteSpace=wrap;html=1;" value="Frontend" vertex="1">
           <mxGeometry height="60" width="390" x="50" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-37" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-16" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-1" value="Calls">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-16" parent="1" style="whiteSpace=wrap;html=1;" value="prompt_builder.py&lt;div&gt;Outputs a string to be used as a prompt&lt;/div&gt;" vertex="1">
+          <mxGeometry height="135" width="80" x="630" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-23" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-16" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="sVBiCvpYJttLRyskf0Hf-7" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="380" y="410" as="sourcePoint" />
+            <mxPoint x="430" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-24" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-23" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Return Built Prompt" vertex="1">
+          <mxGeometry relative="1" x="0.3992" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-39" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Output Notes" vertex="1">
+          <mxGeometry height="160" width="170" x="790" y="105" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-43" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-7" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.191;entryY=-0.006;entryDx=0;entryDy=0;entryPerimeter=0;" target="sVBiCvpYJttLRyskf0Hf-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-44" connectable="0" parent="sVBiCvpYJttLRyskf0Hf-43" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="POST" vertex="1">
+          <mxGeometry relative="1" x="-0.1451" y="-2" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

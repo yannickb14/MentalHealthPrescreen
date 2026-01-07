@@ -2,10 +2,10 @@ import os
 import asyncio
 from typing import Optional
 from backboard import BackboardClient
-from models import ParsedPrompt
+from MentalHealthPrescreen.neuroflow.prompt_schemas import ParsedResponse
 import prompts
 
-async def parse_prompt_llm(text: str) -> ParsedPrompt:
+async def parse_prompt_llm(text: str) -> ParsedResponse:
     """
     Use LLM to parse raw patient text into structured ParsedPrompt.
     Returns: ParsedPrompt object with intent, emotion, and memory candidates.
@@ -30,7 +30,7 @@ async def parse_prompt_llm(text: str) -> ParsedPrompt:
     import json
     data = json.loads(response_text)
 
-    return ParsedPrompt(
+    return ParsedResponse(
         text=text,
         intent=data.get("intent"),
         emotion=data.get("emotion"),

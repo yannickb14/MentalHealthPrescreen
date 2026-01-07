@@ -2,7 +2,10 @@ from dataclasses import dataclass, field
 from typing import List, Dict
 
 @dataclass
-class ParsedPrompt:
+class ParsedResponse:
+    """
+    Used by parsing.py to build a python object representing the JSON output of the llm, to be passed to memory and extracted.
+    """
     text: str
     intent: str = None
     emotion: str = None
@@ -13,6 +16,7 @@ class ParsedPrompt:
 class ResponsePlan:
     """
     Used by backbone to plan a response for the patient.
+    unused so far.
     """
     tone: str = "neutral"  # e.g., empathetic, supportive
     goals: List[str] = field(default_factory=list)

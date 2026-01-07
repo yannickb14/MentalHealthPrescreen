@@ -2,7 +2,7 @@
 import asyncio
 import json
 from backboard import BackboardClient
-from models import ParsedPrompt, ResponsePlan
+from MentalHealthPrescreen.neuroflow.prompt_schemas import ParsedResponse, ResponsePlan
 
 async def main():
     # Initialize the Backboard client
@@ -74,7 +74,7 @@ async def main():
 
 async def generate_questions(
     self,
-    parsed: ParsedPrompt,
+    parsed: ParsedResponse,
     long_term_memories: list[str] = None,
     plan: ResponsePlan = None,
     max_questions: int = 3
