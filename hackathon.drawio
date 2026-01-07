@@ -13,14 +13,14 @@
         <mxCell id="sVBiCvpYJttLRyskf0Hf-31" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-5" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-9" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="llm.py&lt;div&gt;Contains the API agent object and queries it. Can query the memory.&lt;/div&gt;&lt;div&gt;Builds a JSON object summarizing the message from the user.&lt;/div&gt;" vertex="1">
-          <mxGeometry height="100" width="190" x="50" y="540" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="llm.py&lt;div&gt;Contains the API agent object and queries it. Can query the memory.&lt;/div&gt;&lt;div&gt;Builds a JSON object summarizing the message from the user.&lt;/div&gt;&lt;div&gt;Generates a follow-up question to be sent back to the user in the top layer.&lt;/div&gt;&lt;div&gt;If the LLM recognizes that the user would like to terminate questioning, it sends a termination:true json back to parsing.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="290" x="45" y="630" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-29" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-6" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-9" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-6" parent="1" style="whiteSpace=wrap;html=1;" value="memory.py&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Takes a structured ParsedResponse object from parsing.py (which comes from LLM JSON output)&lt;/div&gt;" vertex="1">
-          <mxGeometry height="100" width="190" x="407.5" y="540" as="geometry" />
+          <mxGeometry height="100" width="190" x="400" y="680" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-17" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-7" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-16">
           <mxGeometry relative="1" as="geometry" />
@@ -43,8 +43,8 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-7" parent="1" style="whiteSpace=wrap;html=1;" value="parsing.py&lt;br&gt;Reads the string inputted by the user, and converts it into a Python object (ParsedPrompt), using project metadata and additional instructions.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;From the JSON returned by llm, parsing.py calls the memory with the ParsedResponse object it creates.&lt;/div&gt;" vertex="1">
-          <mxGeometry height="130" width="270" x="50" y="320" as="geometry" />
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-7" parent="1" style="whiteSpace=wrap;html=1;" value="parsing.py&lt;br&gt;Reads the string inputted by the user, and converts it into a Python object (ParsedPrompt), using project metadata and additional instructions.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;From the JSON returned by llm, parsing.py calls the memory with the ParsedResponse object it creates. If the JSON contains &#39;termination:true&quot;, return true so Main&#39;s loop can end.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Receives a follow-up question as text from the LLM and sends back to main.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="280" x="50" y="320" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-27" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-8" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-6" value="">
           <mxGeometry relative="1" as="geometry">
@@ -76,7 +76,7 @@
           <mxGeometry height="100" width="180" x="535" y="135" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-9" parent="1" style="whiteSpace=wrap;html=1;" value="API" vertex="1">
-          <mxGeometry height="70" width="460" x="40" y="750" as="geometry" />
+          <mxGeometry height="70" width="460" x="30" y="960" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-20" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-10" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-7" value="">
           <mxGeometry relative="1" as="geometry" />
@@ -94,7 +94,7 @@
             <mxPoint x="14" y="-3" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="sVBiCvpYJttLRyskf0Hf-10" parent="1" style="whiteSpace=wrap;html=1;" value="main.py&lt;br&gt;Session Manager, waits for response and sends to the frontend" vertex="1">
+        <mxCell id="sVBiCvpYJttLRyskf0Hf-10" parent="1" style="whiteSpace=wrap;html=1;" value="main.py&lt;br&gt;Session Manager, waits for response and sends to the frontend. Receives a follow up question from parsing.py and displays it to the user, waiting for a response.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;If parsing.py returns true, terminate questioning.&lt;/div&gt;" vertex="1">
           <mxGeometry height="110" width="325" x="82.5" y="130" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-14" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-12" style="edgeStyle=orthogonalEdgeStyle;shape=pipe;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="sVBiCvpYJttLRyskf0Hf-10" value="">
@@ -120,7 +120,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-16" parent="1" style="whiteSpace=wrap;html=1;" value="prompt_builder.py&lt;div&gt;Outputs a string to be used as a prompt&lt;/div&gt;" vertex="1">
-          <mxGeometry height="135" width="80" x="630" y="360" as="geometry" />
+          <mxGeometry height="135" width="170" x="630" y="360" as="geometry" />
         </mxCell>
         <mxCell id="sVBiCvpYJttLRyskf0Hf-23" edge="1" parent="1" source="sVBiCvpYJttLRyskf0Hf-16" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="sVBiCvpYJttLRyskf0Hf-7" value="">
           <mxGeometry height="50" relative="1" width="50" as="geometry">
