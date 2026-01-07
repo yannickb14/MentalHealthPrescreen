@@ -4,6 +4,7 @@ from typing import Optional
 from backboard import BackboardClient
 from prompt_schemas import ParsedResponse
 import prompts
+import json
 
 def generate_response():
     raise NotImplementedError("Implement Generate Response and Import it")
@@ -69,7 +70,7 @@ class LLMClient:
         thread_id: Optional[str] = None,
         memory: str = "Auto",
         stream: bool = False
-    ) -> Dict[str, Any]:
+    ) -> dict[str, any]:
         """
         Sends a prompt expecting JSON output.
         Returns both raw text and parsed JSON.

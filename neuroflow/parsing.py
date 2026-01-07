@@ -1,10 +1,12 @@
-from llm import generate_response  # your LLM wrapper
+from llm import LLMClient  # your LLM wrapper
 from prompt_schemas import ParsedResponse
 import prompts
 from typing import Dict, List, Any, Optional
 from memory import MemoryManager
 
-#POST
+#TODO Implement, where do this come from?
+prompt_builder = None
+
 def post_patient_text_to_llm(llm_client: LLMClient, patient_text: str, memory_context: str = ""):
     prompt = prompt_builder.build_full_prompt(patient_text, memory_context) #build prompt
     response = llm_client.post_prompt(prompt) #json response
