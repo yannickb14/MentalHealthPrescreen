@@ -1,42 +1,56 @@
 import asyncio
-from parsing import parse_llm_response #<- I think this? #parse_prompt_llm
+from parsing import post_patient_text_to_llm  #<- I think this? #parse_prompt_llm
 from memory import MemoryManager #NeuroFlow
 from llm import LLMClient
 from prompt_schemas import ParsedResponse
 from dotenv import load_dotenv
+from tools.notetaker import NoteTaker
 
 load_dotenv()
 
-async def main():
-    # ---- 1. Initialize LLM and memory ----
-    llm = LLMClient()
-    await llm.init_assistant()
+class NeuroFlowMain:
+    """
+    Main orchestration layer.
+    This is the only module the frontend talks to.
+    """
 
-    memory_manager = MemoryManager()
-    await memory_manager.init_assistant()
+    def __init__(
+        self,
+        llm_client: LLMClient,
+        memory_manager: MemoryManager,
+        notetaker: NoteTaker
+    ):
+        self.llm = llm_client
+        self.memory = memory_manager
+        self.notetaker = notetaker
+    
+    
+    async def handle_patient_message(
+        self,
+        thread_id: str,
+        patient_text: str
+    ) -> dict:
+        """
+        One turn of the chat loop.
+        Returns response text + terminate flag for the frontend.
+        """
 
-    # ---- 2. Create a session/thread for this patient ----
-    thread = await memory_manager.client.create_thread(memory_manager.assistant.assistant_id)
-    thread_id = thread.thread_id
+        memory_context = self.memory.get_context(thread_id)
 
-    # ---- 3. Example patient input ----
-    patient_input = "I have trouble sleeping at night and feel anxious about work."
+        parsed = await post_patient_text_to_llm(
+            llm_client=self.llm,
+            patient_text=patient_text,
+            memory_context=memory_context
+        )
 
-    # ---- 4. Parse input with LLM ----
-    parsed: ParsedResponse = await parse_llm_response(patient_input, llm)
+        # Store memory
+        self.memory.write(thread_id, parsed.memory_candidates)
 
-    print("Parsed Prompt:")
-    print(parsed)
+        # End-of-chat handling
+        if parsed.terminate:
+            self.notetaker.write(thread_id, self.memory)
 
-    # ---- 5. Write long-term memory only ----
-    await memory_manager.write(thread_id, parsed.memory_candidates)
-
-    # ---- 6. Generate a response (simplest case) ----
-    response_prompt = f"Based on the patient input, respond empathetically:\n\n{patient_input}"
-    reply = await llm.generate_response(prompt=response_prompt, thread_id=thread_id)
-
-    print("\nNeuroFlow Reply:")
-    print(reply)
-
-if __name__ == "__main__":
-    asyncio.run(main())
+        return {
+            "response": parsed.response,
+            "terminate": parsed.terminate
+        }
