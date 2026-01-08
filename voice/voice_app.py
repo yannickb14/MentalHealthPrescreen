@@ -1,20 +1,34 @@
+'''
+Script to get Audio on a website. Must be ran using this command
+streamlit run voice/voice_app.py
+'''
+
+
 import streamlit as st
 import asyncio
+import os
 from audio_recorder_streamlit import audio_recorder
 from backboard import BackboardClient
 from openai import OpenAI 
+from dotenv import load_dotenv
+load_dotenv()
 
 #Becuase of how we need to run the streamlit file, we cant run it like a normal module so 
 #we do this nasty stuff to get the API_KEY
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from config import BACKBOARD_API_KEY, OPENAI_API_KEY
+BACKBOARD_API_KEY = os.getenv("BACKBOARD_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if BACKBOARD_API_KEY is None:
+    raise Exception("BACKBOARD_API_KEY is None")
+
+if OPENAI_API_KEY is None:
+    raise Exception("OPENAI_API_KEY is None")
 
 # 1. Setup Clients
 # You need BOTH keys. Backboard for memory, OpenAI for voice.
 client_bb = BackboardClient(api_key=BACKBOARD_API_KEY)
 client_oa = OpenAI(api_key=OPENAI_API_KEY)
+
 
 # Async helper
 def run_async(coroutine):

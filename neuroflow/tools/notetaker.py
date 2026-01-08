@@ -4,14 +4,11 @@ import re
 from backboard import BackboardClient
 
 class NoteTaker:
-    def __init__(self):
-        self.api_key = os.getenv("BACKBOARD_API_KEY")
-        if not self.api_key:
-            raise Exception("BACKBOARD API KEY not found")
-            
-        self.client = BackboardClient(api_key=self.api_key)
+    api_key = os.getenv("BACKBOARD_API_KEY")  
+    client = BackboardClient(api_key=api_key)
 
-    async def generate_notes(self, thread_id: str):
+    @staticmethod
+    async def generate_notes(thread_id: str):
         """
         Interacts with the EXISTING thread and memory to generate a clinical summary.
         It does not continue the conversation; it forces a 'Scribe' mode response.
@@ -56,7 +53,7 @@ class NoteTaker:
 
         # 2. Send the command to Backboard
         # We treat this as a message, but the content forces the AI to step out of character.
-        response = await self.client.add_message(
+        response = await NoteTaker.client.add_message(
             thread_id=thread_id,
             content=scribe_prompt,
             # If your Backboard plan supports 'json_object' response format, uncomment this:
@@ -65,9 +62,10 @@ class NoteTaker:
 
         # 3. Extract and Clean the Output
         raw_content = response.latest_message.content
-        return self._parse_json_safely(raw_content)
+        return NoteTaker._parse_json_safely(raw_content)
 
-    def _parse_json_safely(self, text: str):
+    @staticmethod
+    def _parse_json_safely(text: str):
         """
         LLMs often wrap JSON in markdown (```json ... ```). This strips it.
         """
@@ -78,7 +76,7 @@ class NoteTaker:
             clean_text = clean_text.strip()
             
             return json.loads(clean_text)
-        except json.JSONDecodeError as e:
+        except json.JSONDecodeError:
             print(f"❌ JSON Parsing Failed. Raw output: {text}")
             # Fallback: Return the raw text wrapped in a dict so the app doesn't crash
             return {
