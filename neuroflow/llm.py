@@ -27,6 +27,39 @@ class LLMClient:
                 description=description
             )
 
+    async def create_thread(self) -> str:
+        if self.assistant is None:
+            await self.init_assistant()
+
+        thread_obj = await self.client.create_thread(assistant_id=self.assistant.assistant_id)
+        return thread_obj.thread_id  # valid UUID to use in add_message
+
+
+    async def generate_response(
+        self,
+        prompt: str,
+        thread_id: Optional[str] = None,
+        memory: str = "Auto",
+        stream: bool = False
+    ) -> str:
+        """
+        Calls Backboard API to generate a response for the given prompt.
+        Returns the raw text of the assistant's latest message.
+        """
+        if self.assistant is None:
+            await self.init_assistant()
+
+        response = await self.client.add_message(
+            #assistant_id=self.assistant.id, no assistant variable
+            thread_id=thread_id,
+            content=prompt,
+            memory=memory,
+            stream=stream
+        )
+
+        # Return the latest message content from the assistant
+        return response.latest_message.content
+
     #POST
     async def post_prompt(
         self,

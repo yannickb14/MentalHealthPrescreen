@@ -7,9 +7,9 @@ import json
 from tools import prompt_builder
 
 #Send to API
-def post_patient_text_to_llm(llm_client: LLMClient, patient_text: str, memory_context: str = ""):
+async def post_patient_text_to_llm(llm_client: LLMClient, patient_text: str, thread_id, memory_context: str = ""):
     prompt = prompt_builder.build_full_prompt(patient_text, memory_context) #build prompt
-    response = llm_client.post_prompt(prompt) #json response
+    response = await llm_client.post_prompt(prompt, thread_id) #json response
     return response # dict[str->Any]
 
 def parse_llm_response(raw_llm_response, input_text: str):

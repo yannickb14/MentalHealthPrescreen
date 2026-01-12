@@ -44,3 +44,20 @@ class MemoryManager:
                 memory="Auto",   # Let Backboard decide storage
                 stream=False
             )
+
+    async def get_context(self, thread_id: str) -> str:
+        """
+        Returns a string of relevant memory to include in the prompt.
+        """
+        # Ensure assistant is initialized
+        await self.init_assistant()
+
+        # Read stored memories (stub for now just returns thread_id)
+        # In real implementation, you would fetch long-term memory objects
+        memories = await self.read(thread_id)  # this could return a list of items
+        if isinstance(memories, list):
+            return "\n".join(memories)
+        elif isinstance(memories, str):
+            return memories
+        else:
+            return ""

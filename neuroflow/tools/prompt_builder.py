@@ -6,8 +6,8 @@ from tools.response_planner import default_response_plan, build_response_plan
 
 def build_full_prompt(
     patient_text: str = "",
-    parsed: ParsedResponse | None = None,
-    memory_context: str = ""
+    memory_context: str = "",
+    parsed: ParsedResponse | None = None
 ) -> str:
     """
     Build the full LLM prompt:
