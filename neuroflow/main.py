@@ -54,7 +54,7 @@ class NeuroFlowMain:
 
         # End-of-chat handling
         if parsed.terminate:
-            self.notetaker.generate_notes(thread_id)
+            await self.notetaker.generate_notes(thread_id)
 
         return {
             "response": parsed.response,

@@ -3,6 +3,14 @@ import json
 import re
 from backboard import BackboardClient
 from dotenv import load_dotenv
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.pagesizes import LETTER
+from reportlab.lib.units import inch
+from datetime import datetime
+from pathlib import Path
+
+REPO_ROOT = "clinical_notes/" + Path(__file__).resolve().parents[2]
 
 class NoteTaker:
     load_dotenv()
@@ -11,7 +19,52 @@ class NoteTaker:
     client = BackboardClient(api_key=api_key)
 
     @staticmethod
-    async def generate_notes(thread_id: str):
+    def _notes_to_pdf(notes: dict, output_path: str):
+        """
+        Serialize SOAP notes into a readable PDF.
+        """
+        styles = getSampleStyleSheet()
+        story = []
+
+        def heading(text):
+            story.append(Paragraph(f"<b>{text}</b>", styles["Heading2"]))
+            story.append(Spacer(1, 0.2 * inch))
+
+        def body(text):
+            story.append(Paragraph(text or "N/A", styles["Normal"]))
+            story.append(Spacer(1, 0.2 * inch))
+
+        heading("Clinical SOAP Note")
+
+        body(f"Patient ID: {notes.get('patient_id', 'unknown')}")
+        body(f"Generated at: {datetime.utcnow().isoformat()} UTC")
+
+        heading("Subjective")
+        subj = notes.get("subjective", {})
+        body(f"<b>Chief Complaint:</b> {subj.get('chief_complaint')}")
+        body(f"<b>History of Present Illness:</b> {subj.get('history_of_present_illness')}")
+        body(f"<b>Emotional State:</b> {subj.get('emotional_state')}")
+
+        heading("Objective")
+        obj = notes.get("objective", {})
+        body(f"<b>Observations:</b> {obj.get('observations')}")
+        body(f"<b>Risk Factors:</b> {', '.join(obj.get('risk_factors', []))}")
+
+        heading("Assessment")
+        assess = notes.get("assessment", {})
+        body(f"<b>Summary:</b> {assess.get('summary')}")
+        body(f"<b>Differential Diagnosis:</b> {', '.join(assess.get('differential_diagnosis', []))}")
+
+        heading("Plan")
+        plan = notes.get("plan", {})
+        body(f"<b>Immediate Actions:</b> {plan.get('immediate_actions')}")
+        body(f"<b>Recommendations:</b> {plan.get('recommendations')}")
+
+        doc = SimpleDocTemplate(output_path, pagesize=LETTER)
+        doc.build(story)
+
+    @staticmethod
+    async def generate_notes(thread_id: str, pdf_dir: str = REPO_ROOT):
         """
         Interacts with the EXISTING thread and memory to generate a clinical summary.
         It does not continue the conversation; it forces a 'Scribe' mode response.
@@ -53,6 +106,7 @@ class NoteTaker:
         """
 
         print(f"📝 Requesting Clinical Notes for Thread: {thread_id}...")
+        os.makedirs(pdf_dir, exist_ok=True)
 
         # 2. Send the command to Backboard
         # We treat this as a message, but the content forces the AI to step out of character.
@@ -65,7 +119,17 @@ class NoteTaker:
 
         # 3. Extract and Clean the Output
         raw_content = response.content or response.message
-        return NoteTaker._parse_json_safely(raw_content)
+        notes = NoteTaker._parse_json_safely(raw_content)
+        if "error" in notes:
+            return notes
+        
+        pdf_path = os.path.join(pdf_dir, f"{thread_id}_soap_note.pdf")
+        NoteTaker._notes_to_pdf(notes, pdf_path)
+    
+        return {
+            "notes": notes,
+            "pdf_path": pdf_path
+        }
 
     @staticmethod
     def _parse_json_safely(text: str):
