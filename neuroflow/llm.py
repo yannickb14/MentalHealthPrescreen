@@ -58,7 +58,7 @@ class LLMClient:
         )
 
         # Return the latest message content from the assistant
-        return response.latest_message.content
+        return response.content or response.message
 
     #POST
     async def post_prompt(
@@ -79,8 +79,10 @@ class LLMClient:
             stream=stream
         )
 
+        clean_text = raw_text.replace("```json", "").replace("```", "").strip()
+
         try:
-            data = json.loads(raw_text)
+            data = json.loads(clean_text)
         except json.JSONDecodeError:
             raise ValueError("LLM did not return valid JSON")
 
