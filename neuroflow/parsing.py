@@ -16,9 +16,7 @@ def parse_llm_response(raw_llm_response, input_text: str):
     """
     returnes a parsed version of the response returned by the llm, packed in a ParsedResponse object
     """
-    #llm_response = raw_llm_response.replace("```json", "").replace("```", "").strip()
-    llm_text = raw_llm_response["raw_text"]  # <-- use raw string
-    llm_text = llm_text.replace("```json", "").replace("```", "").strip()
+    llm_text = raw_llm_response.replace("```json", "").replace("```", "").strip()
 
     data = json.loads(llm_text)
 

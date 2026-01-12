@@ -78,15 +78,4 @@ class LLMClient:
             memory=memory,
             stream=stream
         )
-
-        clean_text = raw_text.replace("```json", "").replace("```", "").strip()
-
-        try:
-            data = json.loads(clean_text)
-        except json.JSONDecodeError:
-            raise ValueError("LLM did not return valid JSON")
-
-        return {
-            "raw_text": raw_text,
-            "json": data
-        }
+        return raw_text

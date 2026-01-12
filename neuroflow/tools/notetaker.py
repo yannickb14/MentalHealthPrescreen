@@ -64,7 +64,7 @@ class NoteTaker:
         )
 
         # 3. Extract and Clean the Output
-        raw_content = response.latest_message.content
+        raw_content = response.content or response.message
         return NoteTaker._parse_json_safely(raw_content)
 
     @staticmethod
