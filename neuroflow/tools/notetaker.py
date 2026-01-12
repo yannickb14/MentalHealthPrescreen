@@ -2,8 +2,11 @@ import os
 import json
 import re
 from backboard import BackboardClient
+from dotenv import load_dotenv
 
 class NoteTaker:
+    load_dotenv()
+
     api_key = os.getenv("BACKBOARD_API_KEY")  
     client = BackboardClient(api_key=api_key)
 

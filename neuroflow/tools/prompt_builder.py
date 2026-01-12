@@ -2,7 +2,7 @@
 
 from prompts import INTENT_DEFINITIONS, EMOTION_DEFINITIONS, RESPONSE_INSTRUCTIONS
 from prompt_schemas import ParsedResponse, ResponsePlan
-from response_planner import default_response_plan, build_response_plan
+from tools.response_planner import default_response_plan, build_response_plan
 
 def build_full_prompt(
     patient_text: str = "",
