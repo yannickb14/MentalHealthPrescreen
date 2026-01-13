@@ -10,7 +10,7 @@ from reportlab.lib.units import inch
 from datetime import datetime
 from pathlib import Path
 
-REPO_ROOT = "clinical_notes/" + str(Path(__file__).resolve().parents[2])
+REPO_ROOT = str(Path(__file__).resolve().parents[2])
 
 class NoteTaker:
     load_dotenv()
