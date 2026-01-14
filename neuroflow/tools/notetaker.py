@@ -113,6 +113,8 @@ class NoteTaker:
         response = await NoteTaker.client.add_message(
             thread_id=thread_id,
             content=scribe_prompt,
+            llm_provider = "google",
+            model_name = "gemini-2.5-flash"
             # If your Backboard plan supports 'json_object' response format, uncomment this:
             # response_format={"type": "json_object"} 
         )

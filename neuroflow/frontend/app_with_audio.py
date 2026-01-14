@@ -83,7 +83,9 @@ def text_to_speech_file(text):
 if "messages" not in st.session_state:
     st.session_state.messages = []
     # Initial Greeting with Audio
-    greeting = "Hello! I am NeuroFlow. How can I help?"
+    greeting = "Hello! I’m NeuroFlow, your prescreening assistant. I’m here to ask a few questions to \
+        better understand your current mental health and wellbeing. To start, can you tell me how you’ve been feeling \
+            emotionally over the past week?"
     greeting_audio = text_to_speech_file(greeting)
     st.session_state.messages.append({
         "role": "assistant", 
