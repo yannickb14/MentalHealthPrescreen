@@ -7,8 +7,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import LETTER
 from reportlab.lib.units import inch
-from datetime import datetime
-from pathlib import Path
+import datetime
 
 REPO_ROOT = "clinical_notes/" 
 
@@ -37,7 +36,7 @@ class NoteTaker:
         heading("Clinical SOAP Note")
 
         body(f"Patient ID: {notes.get('patient_id', 'unknown')}")
-        body(f"Generated at: {datetime.utcnow().isoformat()} UTC")
+        body(f"Generated at: {datetime.datetime.utcnow().isoformat()} UTC")
 
         heading("Subjective")
         subj = notes.get("subjective", {})
@@ -123,7 +122,9 @@ class NoteTaker:
         if "error" in notes:
             return notes
         
-        pdf_path = os.path.join(pdf_dir, f"{thread_id}_soap_note.pdf")
+        curr_time = datetime.datetime.now()
+        time_stamp = curr_time.strftime("%Y-%m-%d_%H-%M-%S")
+        pdf_path = os.path.join(pdf_dir, f"{time_stamp}_soap_note.pdf")
         NoteTaker._notes_to_pdf(notes, pdf_path)
     
         return {
