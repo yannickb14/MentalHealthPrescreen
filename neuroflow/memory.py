@@ -39,10 +39,10 @@ class MemoryManager:
 
         for item in long_term: 
             await self.client.add_memory(
-                thread_id=thread_id,
+                assistant_id=thread_id,
                 content=item,
-                memory="Auto",   # Let Backboard decide storage
-                stream=False
+               # memory="Auto",   # Let Backboard decide storage
+               # stream=False
             )
 
     async def get_context(self, thread_id: str) -> str:
