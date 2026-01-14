@@ -54,6 +54,8 @@ class LLMClient:
             thread_id=thread_id,
             content=prompt,
             memory=memory,
+            llm_provider="google",
+            model_name="gemini-2.5-flash",
             stream=stream
         )
 
