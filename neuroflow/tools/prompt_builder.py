@@ -54,7 +54,8 @@ def build_full_prompt(
     - response: text to respond back to the patient
     {RESPONSE_INSTRUCTIONS}
 
-    - terminate: boolean whether the chat is over (should be indicated by patient)
+    - terminate: boolean whether the chat is over. This can be indicated by the patient, or alternatively, once you know enough information, 
+    terminate the chat yourself. This should take around 6 to 10 rounds, and NEVER more than 12. Ensure that your questions are efficient at gathering information on the patient.
 
     Response guidelines:
     {plan_text}
