@@ -36,7 +36,7 @@ class NoteTaker:
         heading("Clinical SOAP Note")
 
         body(f"Patient ID: {notes.get('patient_id', 'unknown')}")
-        body(f"Generated at: {datetime.datetime.utcnow().isoformat()} UTC")
+        body(f"Generated at: {datetime.utcnow().isoformat()} UTC")
 
         heading("Subjective")
         subj = notes.get("subjective", {})
