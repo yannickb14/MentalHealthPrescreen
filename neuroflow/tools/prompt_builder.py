@@ -1,6 +1,6 @@
 # prompt_builder.py
 
-from prompts import INTENT_DEFINITIONS, EMOTION_DEFINITIONS, RESPONSE_INSTRUCTIONS
+from prompts import INTENT_DEFINITIONS, EMOTION_DEFINITIONS, RESPONSE_INSTRUCTIONS, OVERALL_INSTRUCTIONS
 from prompt_schemas import ParsedResponse, ResponsePlan
 from tools.response_planner import default_response_plan, build_response_plan
 
@@ -41,7 +41,9 @@ def build_full_prompt(
 
     # Step 4: Compose full prompt
     full_prompt = f"""
-    You are a clinician AI. Analyze the patient's text and return a JSON object with the following fields:
+    {OVERALL_INSTRUCTIONS}
+    
+    Analyze the patient's text and return a JSON object with the following fields:
 
     - intent: one of:
     {INTENT_DEFINITIONS}
