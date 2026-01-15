@@ -7,7 +7,7 @@ Watch our [official submission](https://www.youtube.com/watch?v=C8vKlanHUTI)
 
 > *Built for McHacks 2026*
 
-NeuroFlow is an intelligent conversational agent designed to combat physician burnout. It conducts dynamic, clinical interviews with patients in the waiting room and generates structured **SOAP notes** (Subjective, Objective, Assessment, Plan) for the doctor instantly.
+NeuroFlow is an intelligent conversational agent designed to combat physician burnout. It conducts dynamic, clinical interviews with patients in the waiting room and generates structured **SOAP notes** (Subjective, Objective, Assessment, Plan) for the doctor instantly. Check out [```client_notes```](https://github.com/yannickb14/MentalHealthPrescreen/tree/main/clinical_notes) for some example outputs.
 
 ---
 
